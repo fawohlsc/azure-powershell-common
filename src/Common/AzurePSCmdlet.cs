@@ -50,7 +50,7 @@ namespace Microsoft.WindowsAzure.Commands.Utilities.Common
         private object lockObject = new object();
         private AzurePSDataCollectionProfile _cachedProfile = null;
 
-        protected IList<Regex> _matchers { get;  private set; }  = new List<Regex>();
+        protected IList<Regex> _matchers { get; private set; } = new List<Regex>();
         private static readonly Regex _defaultMatcher = new Regex("(\\s*\"access_token\"\\s*:\\s*)\"[^\"]+\"");
 
         protected AzurePSDataCollectionProfile _dataCollectionProfile
@@ -390,10 +390,22 @@ namespace Microsoft.WindowsAzure.Commands.Utilities.Common
 
             InitializeQosEvent();
             LogCmdletStartInvocationInfo();
+
+            WriteDebugWithTimestamp("Entering InitDebuggingFilter");
             InitDebuggingFilter();
+            WriteDebugWithTimestamp("Leaving InitDebuggingFilter");
+
+            WriteDebugWithTimestamp("Entering SetupDebuggingTraces");
             SetupDebuggingTraces();
+            WriteDebugWithTimestamp("Leaving SetupDebuggingTraces");
+
+            WriteDebugWithTimestamp("Entering SetupHttpClientPipeline");
             SetupHttpClientPipeline();
+            WriteDebugWithTimestamp("Leaving SetupHttpClientPipeline");
+
+            WriteDebugWithTimestamp("Entering base.BeginProcessing");
             base.BeginProcessing();
+            WriteDebugWithTimestamp("Leaving base.BeginProcessing");
 
             //Now see if the cmdlet has any Breaking change attributes on it and process them if it does
             //This will print any breaking change attribute messages that are applied to the cmdlet

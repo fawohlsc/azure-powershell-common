@@ -181,6 +181,7 @@ namespace Microsoft.Azure.Commands.ResourceManager.Common
         /// <returns>True if there is a valid default context, false otherwise</returns>
         public virtual bool TryGetDefaultContext(out IAzureContext context)
         {
+            WriteDebugWithTimestamp("Entering TryGetDefaultContext()");
             bool result = false;
             context = null;
 
@@ -190,6 +191,7 @@ namespace Microsoft.Azure.Commands.ResourceManager.Common
                 result = true;
             }
 
+            WriteDebugWithTimestamp("Leaving TryGetDefaultContext()");
             return result;
         }
 
